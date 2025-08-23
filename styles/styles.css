@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    background-color: #322C43;
+}
+
+.startscreen {
+    background-image: url(../assets/screens/Sunnyland.png);
+    height: 100vh;
+    width: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.startbutton {
+    width: 300px;
+    height: 100px;
+    animation: startbutton-animation 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+    background-image: url(../assets/controls/start_default.svg);
+    background-size: contain;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none
+}
+
+.startbutton:hover {
+    background-image: url(../assets/controls/start_hover.svg);
+}
+
+.controlsbutton {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    background-image: url(../assets/controls/info_default.svg);
+    background-size: contain;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none
+}
+
+.controlsbutton:hover {
+    background-image: url(../assets/controls/info_hover.svg);
+}
+
+@keyframes startbutton-animation {
+    0% {
+        margin-bottom: 0;
+        transform: scale(0.5);
+    }
+
+    100% {
+        margin-bottom: 10%;
+        transform: scale(1);
+    }
+}
