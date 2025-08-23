@@ -8,11 +8,17 @@
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="stylesheet" href="./styles/responsive.css">
     <script src="scripts/script.js"></script>
+    <script src="classes/drawableObject.class.js"></script>
+    <script src="classes/backgroundObject.class.js"></script>
+    <script src="classes/level.class.js"></script>
+    <script src="classes/game.class.js"></script>
 </head>
 <body>
     <div class="startscreen">
         <button class="controlsbutton"></button>
-        <button class="startbutton"></button>
+        <button onclick="startGame()" class="startbutton"></button>
     </div>
+
+    <canvas height="480" width="720"></canvas>
 </body>
 </html>
