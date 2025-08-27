@@ -21,11 +21,11 @@ class DrawableObject {
         this.img.src = path;
     }
 
-    playAnimation(self, images) {
-        let i = self.currentImage % images.length;
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
         let path = images[i];
-        self.img = self.imageCache[path];
-        self.currentImage++;
+        this.img = this.imageCache[path];
+        this.currentImage++;
     }
 
     draw(ctx) {

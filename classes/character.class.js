@@ -42,6 +42,6 @@ class Character extends DrawableObject {
             this.loadImages(this.animations[animation])
         }
 
-        setInterval(this.playAnimation, 150, this, this.animations["images_idle"])
+        setInterval(() => this.playAnimation(this.animations["images_idle"]), 150)
     }
 }
