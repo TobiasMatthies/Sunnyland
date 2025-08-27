@@ -11,11 +11,22 @@ class Game {
 
     drawObjects() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.level.backgroundObjects[0].draw(this.ctx)
+        this.addObjectsToMap(this.level.backgroundObjects)
+        this.addToMap(this.level.character)
 
         let self = this;
         requestAnimationFrame(function () {
             self.drawObjects();
         });
+    }
+
+    addObjectsToMap(objects) {
+        objects.forEach(o => {
+            this.addToMap(o);
+        });
+    }
+
+    addToMap(o) {
+        o.draw(this.ctx);
     }
 }

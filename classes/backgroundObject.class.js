@@ -1,5 +1,5 @@
 class BackgroundObject extends DrawableObject {
-    constructor() {
-        super().setInitialImage("../assets/background/Heaven-Background.png")
+    constructor(image, x, y, height, width) {
+        super(image, x, y, height, width)
     }
 }
