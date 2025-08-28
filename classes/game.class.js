@@ -3,6 +3,7 @@ class Game {
     keyboard;
     canvas;
     ctx;
+    cameraX
 
     constructor(canvas, level, keyboard) {
         this.canvas = canvas;
@@ -14,8 +15,11 @@ class Game {
 
     drawObjects() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this.cameraX, 0);
         this.addObjectsToMap(this.level.backgroundObjects)
         this.addToMap(this.level.character)
+
+        this.ctx.translate(-this.cameraX, 0);
 
         let self = this;
         requestAnimationFrame(function () {
