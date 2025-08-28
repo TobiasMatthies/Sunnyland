@@ -1,10 +1,13 @@
 class Game {
-    level = new Level();
+    level;
+    keyboard;
     canvas;
     ctx;
 
-    constructor(canvas) {
+    constructor(canvas, level, keyboard) {
         this.canvas = canvas;
+        this.level = level;
+        this.keyboard = keyboard;
         this.ctx = canvas.getContext("2d")
         this.drawObjects()
     }
