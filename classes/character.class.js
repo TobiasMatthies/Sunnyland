@@ -17,7 +17,6 @@ class Character extends MovableObject {
         ],
 
         images_jump: [
-            "../assets/character/jump_1@4X.png",
             "../assets/character/jump_2@4X.png",
             "../assets/character/jump_3@4X.png",
         ],
@@ -49,28 +48,37 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (game.keyboard.keys.ArrowRight || game.keyboard.keys.ArrowLeft) {
+            if ((game.keyboard.keys.ArrowRight || game.keyboard.keys.ArrowLeft) && !this.isAboveGround()) {
                 this.playAnimation(this.animations["images_run"])
                 this.x += this.speedX;
             }
         }, 100)
 
         setInterval(() => {
-            if (!game.keyboard.keys.ArrowRight && !game.keyboard.keys.ArrowLeft) {
+            if (!game.keyboard.keys.ArrowRight && !game.keyboard.keys.ArrowLeft && !this.isAboveGround()) {
                 this.playAnimation(this.animations["images_idle"])
             }
         }, 150)
+        setInterval(()=> {
+            if (this.isAboveGround()) { 
+                if (this.speedY > 0 )this.showImage(this.animations["images_jump"][0])
+                else this.showImage(this.animations["images_jump"][1])
+                }
+        }, 200)
     }
 
     move() {
         setInterval(() => {
             if (game.keyboard.keys.ArrowRight) {
                 this.x += this.speedX;
+                this.otherDirection = false;
             }
             if (game.keyboard.keys.ArrowLeft) {
                 this.x -= this.speedX;
+                this.otherDirection = true;
             }
-            if (game.keyboard.keys.Space) {
+            if (game.keyboard.keys.Space && !this.isAboveGround()) {
+                this.currentImage = 0;
                 this.jump()
             }
             game.cameraX = -this.x + 100
@@ -78,6 +86,6 @@ class Character extends MovableObject {
     }
 
     jump() {
-        this.speedY = 12;
+        this.speedY = 16;
     }
 }

@@ -1,6 +1,6 @@
 class MovableObject extends DrawableObject {
     speedY = 0;
-    acceleration = 0.8;
+    acceleration = 0.7;
     otherDirection = false
 
     constructor(img, x, y, height, width) {
@@ -15,11 +15,19 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    showImage(image) {
+        this.img = this.imageCache[image]
+    }
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
+            }
+            else {
+                this.speedY = 0
+                this.y = 300
             }
         }, 1000 / 60);
     }

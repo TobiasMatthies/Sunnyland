@@ -34,6 +34,27 @@ class Game {
     }
 
     addToMap(o) {
+        if (o.otherDirection) {
+            this.flipImage(o);
+        }
+        
         o.draw(this.ctx);
+
+        if (o.otherDirection) {
+            this.flipBack(o);
+        }
     }
+
+    flipImage(o) {
+        this.ctx.save();
+        this.ctx.translate(o.width, 0);
+        this.ctx.scale(-1, 1);
+        o.x = o.x * -1;
+    }
+
+    flipBack(o) {
+        o.x = o.x * -1;
+        this.ctx.restore();
+    }
+
 }
