@@ -49,14 +49,14 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (game.keyboard.keys.ArrowRight) {
+            if (game.keyboard.keys.ArrowRight || game.keyboard.keys.ArrowLeft) {
                 this.playAnimation(this.animations["images_run"])
                 this.x += this.speedX;
             }
         }, 100)
 
         setInterval(() => {
-            if (!game.keyboard.keys.ArrowRight) {
+            if (!game.keyboard.keys.ArrowRight && !game.keyboard.keys.ArrowLeft) {
                 this.playAnimation(this.animations["images_idle"])
             }
         }, 150)
@@ -66,8 +66,18 @@ class Character extends MovableObject {
         setInterval(() => {
             if (game.keyboard.keys.ArrowRight) {
                 this.x += this.speedX;
-                game.cameraX = -this.x + 100
             }
+            if (game.keyboard.keys.ArrowLeft) {
+                this.x -= this.speedX;
+            }
+            if (game.keyboard.keys.Space) {
+                this.jump()
+            }
+            game.cameraX = -this.x + 100
         }, 1000 / 60)
+    }
+
+    jump() {
+        this.speedY = 12;
     }
 }
