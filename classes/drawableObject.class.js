@@ -32,4 +32,9 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
+
+    isColliding(object) {
+        return (this.x + this.width) >= object.x && this.x <= (object.x + object.width) &&
+            (this.y + this.height) >= object.y && this.y <= (object.y + object.height);
+    }
 }
