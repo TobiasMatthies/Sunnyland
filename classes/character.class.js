@@ -77,7 +77,7 @@ class Character extends MovableObject {
                 this.x -= this.speedX;
                 this.otherDirection = true;
             }
-            if (game.keyboard.keys.Space && !this.isAboveGround()) {
+            if (game.keyboard.keys.ArrowUp && !this.isAboveGround()) {
                 this.currentImage = 0;
                 this.jump()
             }

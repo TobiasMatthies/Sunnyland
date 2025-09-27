@@ -1,4 +1,35 @@
 class Level {
+    static getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    allLandscapeObjects = [
+        [
+            new BackgroundObject("../assets/landscape/plant-house.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/landscape/straw-house.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/landscape/tree-house.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/landscape/wooden-house.png", Level.getRandomInt(1, 3000), 160, 200, 200)
+        ],
+        [
+            new BackgroundObject("../assets/landscape/rock-1.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/landscape/rock-2.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/landscape/rock.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/landscape/shrooms.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/plants/stone_2.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/plants/stone_3.png", Level.getRandomInt(1, 3000), 160, 200, 200)
+        ],
+        [
+            new BackgroundObject("../assets/landscape/palm.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/landscape/pine.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/landscape/tree_1.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/landscape/tree_2.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/plants/tree_4 1.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/plants/tree_5 1.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+            new BackgroundObject("../assets/plants/tree_6 1.png", Level.getRandomInt(1, 3000), 160, 200, 200),
+        ],
+
+    ];
+
     backgroundObjects = [
         new BackgroundObject("../assets/background/Heaven-Background.png"),
         new BackgroundObject("../assets/background/Heaven-Background.png", 720),
@@ -18,5 +49,25 @@ class Level {
         new BackgroundObject("../assets/background/ground 1.png", 2880, 360, 120),
     ]
 
-    character = new Character(100, 300, 60, 60)
+    character = new Character(100, 180, 60, 60)
+
+    landscapeObjects = this.generateLandscapeObjects()
+
+    generateLandscapeObjects() {
+        let randomLandscapeObjects = [];
+
+        for (let i = 0; i < this.allLandscapeObjects.length; i++) {
+            let imageCollection = this.allLandscapeObjects[i];
+            const spliceAmount = Level.getRandomInt(1, 3);
+
+            for (let j = 0; j < spliceAmount; j++) {
+                imageCollection.splice(Math.floor(Math.random()*imageCollection.length),1);
+            }
+
+            randomLandscapeObjects.push(...imageCollection);
+        }
+
+        console.log(randomLandscapeObjects);
+        return randomLandscapeObjects;
+    }
 }

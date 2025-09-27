@@ -2,6 +2,7 @@ class Keyboard {
     keys = {
         ArrowLeft: false,
         ArrowRight: false,
+        ArrowUp: false,
         Space: false,
         KeyD: false,
     }
