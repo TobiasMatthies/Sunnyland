@@ -7,14 +7,45 @@ class LandscapeObject extends BackgroundObject {
     }
 
     preventCollisionWithLandscapeObjects(allObjects) {
-        let existingLandscapeObject = allObjects.find((lo) => {
-            return lo.preventCollision && lo !== this && this.isColliding(lo);
-        });
+        let attempts = 0;
+        const MAX_ATTEMPTS = 100;
 
-        if (existingLandscapeObject) {
-            // this.x = Level.getRandomInt(1, 3000);
-            this.x = Math.floor(Math.random() * (3000 - 1 + 1) + 1)
-            this.preventCollisionWithLandscapeObjects(allObjects);
+        while (attempts < MAX_ATTEMPTS) {
+            let existingLandscapeObject = this.findExistingLandscapeObject(allObjects);
+
+            if (!existingLandscapeObject) {
+                return;
+            }
+            this.x = Math.floor(Math.random() * (5400 - 1 + 1) + 1);
+            attempts++;
         }
+
+        console.warn("No room for LandscapeObject:", this);
+        const index = allObjects.indexOf(this);
+        if (index !== -1) {
+            allObjects.splice(index, 1);
+        }
+    }
+
+    findExistingLandscapeObject(allObjects) {
+        return allObjects.find(lo => {
+            if (lo === this) return false;
+
+            if (this.preventCollision && this.isColliding(lo)) return true;
+
+            if (this.isOverlappingWithObjectOfSameType(lo)) return true;
+
+            return false;
+        });
+    }
+
+    /**
+     * prevents landscape object from overlapping with
+     * a different obj that has "preventCollision" set to true.
+     * 
+     * This prevents multiple objects from overlapping
+     */
+    isOverlappingWithObjectOfSameType(lo) {
+        return !this.preventCollision && !lo.preventCollision && this.isColliding(lo)
     }
 }
