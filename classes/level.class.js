@@ -65,7 +65,6 @@ class Level {
         this.landscapeObjects = this.generateLandscapeObjects();
     }
 
-    
     static getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
@@ -76,12 +75,12 @@ class Level {
     }
 
     generateRandomAmountOfLandscapeObjects(image, y, height, width, min, max, preventCollision = false) {
-        const RANDOM_AMOUNT = Level.getRandomInt(min, max);
-        let randomObjects = [];
-        for (let i = 0; i < RANDOM_AMOUNT; i++) {
-            randomObjects.push(new LandscapeObject(image, Level.getRandomInt(1, 3000), y, height, width, preventCollision));
+        const amount = Level.getRandomInt(min, max);
+        let objects = [];
+        for (let i = 0; i < amount; i++) {
+            objects.push(new LandscapeObject(image, Level.getRandomInt(1, 3000), y, height, width, preventCollision));
         }
-        return randomObjects;
+        return objects;
     }
 
     generateCategoryObjects(variants, maxTypes, totalTarget, minPerType, maxPerType, preventCollision = false) {
@@ -102,9 +101,9 @@ class Level {
 
     generateLandscapeObjects() {
         let objects = [];
-        const targetCount = Level.getRandomInt(20, 30);
+        const targetCount = Level.getRandomInt(25, 35);
 
-        const weights = { houses: 0.1, trees: 0.4, rocks: 0.15, bushes: 0.35 };
+        const weights = { houses: 0.1, trees: 0.6, rocks: 0.15, bushes: 0.15 };
         const categoryTargets = {
             houses: Math.round(targetCount * weights.houses),
             trees: Math.round(targetCount * weights.trees),
@@ -112,8 +111,16 @@ class Level {
             bushes: Math.round(targetCount * weights.bushes),
         };
 
-        objects.push(...this.generateCategoryObjects(this.houseVariants, 3, categoryTargets.houses, 1, 2, true));
-        objects.push(...this.generateCategoryObjects(this.treeVariants, 4, categoryTargets.trees, 2, 3, true));
+        let firstStepCategories = [
+            { variants: this.houseVariants, maxTypes: 3, target: categoryTargets.houses, minPerType: 1, maxPerType: 2, preventCollision: true },
+            { variants: this.treeVariants, maxTypes: 4, target: categoryTargets.trees, minPerType: 1, maxPerType: 3, preventCollision: true }
+        ];
+
+        firstStepCategories = firstStepCategories.sort(() => 0.5 - Math.random());
+        firstStepCategories.forEach(cat => {
+            objects.push(...this.generateCategoryObjects(cat.variants, cat.maxTypes, cat.target, cat.minPerType, cat.maxPerType, cat.preventCollision));
+        });
+
         objects.push(...this.generateCategoryObjects(this.rockVariants, 3, categoryTargets.rocks, 1, 3));
         objects.push(...this.generateCategoryObjects(this.bushVariants, this.bushVariants.length, categoryTargets.bushes, 2, 4));
 
