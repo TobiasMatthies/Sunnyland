@@ -33,19 +33,9 @@ class LandscapeObject extends BackgroundObject {
 
             if (this.preventCollision && this.isColliding(lo)) return true;
 
-            if (this.isOverlappingWithObjectOfSameType(lo)) return true;
+            if (!this.preventCollision && !lo.preventCollision && this.isColliding(lo)) return true;
 
             return false;
         });
-    }
-
-    /**
-     * prevents landscape object from overlapping with
-     * a different obj that has "preventCollision" set to true.
-     * 
-     * This prevents multiple objects from overlapping
-     */
-    isOverlappingWithObjectOfSameType(lo) {
-        return !this.preventCollision && !lo.preventCollision && this.isColliding(lo)
     }
 }
