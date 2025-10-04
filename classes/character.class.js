@@ -59,11 +59,11 @@ class Character extends MovableObject {
                 this.playAnimation(this.animations["images_idle"])
             }
         }, 150)
-        setInterval(()=> {
-            if (this.isAboveGround()) { 
-                if (this.speedY > 0 )this.showImage(this.animations["images_jump"][0])
+        setInterval(() => {
+            if (this.isAboveGround()) {
+                if (this.speedY > 0) this.showImage(this.animations["images_jump"][0])
                 else this.showImage(this.animations["images_jump"][1])
-                }
+            }
         }, 200)
     }
 
